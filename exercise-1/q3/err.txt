@@ -1,0 +1,8 @@
+============================= test session starts ==============================
+platform linux -- Python 3.8.10, pytest-5.2.2, py-1.8.0, pluggy-0.13.0
+rootdir: /home/matan/Documents/gittick-course/exercise-1/q3
+collected 6 items
+
+tests/test_server_q3.py ......                                           [100%]
+
+============================== 6 passed in 8.93s ===============================

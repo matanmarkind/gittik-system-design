@@ -16,7 +16,7 @@ _SERVER_ADDRESS = '127.0.0.1', 5000
 _SERVER_BACKLOG = 1000
 _CLIENT_PATH = pathlib.Path(__file__).absolute().parent.parent / 'client.py'
 
-_HEADER_FORMAT = 'LLI'
+_HEADER_FORMAT = '<LLI'
 _HEADER_SIZE = struct.calcsize(_HEADER_FORMAT)
 
 _USER_1 = 1
@@ -78,7 +78,7 @@ def test_timestamp(get_message):
 def test_cli(get_message):
     host, port = _SERVER_ADDRESS
     process = subprocess.Popen(
-        ['python', _CLIENT_PATH, f'{host}:{port}', str(_USER_1), _THOUGHT_1],
+        ['python3', _CLIENT_PATH, f'{host}:{port}', str(_USER_1), _THOUGHT_1],
         stdout = subprocess.PIPE,
     )
     stdout, _ = process.communicate()
@@ -92,7 +92,7 @@ def test_cli(get_message):
 def test_cli_error():
     host, port = _SERVER_ADDRESS
     process = subprocess.Popen(
-        ['python', _CLIENT_PATH, f'{host}:{port}', str(_USER_1), _THOUGHT_1],
+        ['python3', _CLIENT_PATH, f'{host}:{port}', str(_USER_1), _THOUGHT_1],
         stdout = subprocess.PIPE,
     )
     stdout, _ = process.communicate()

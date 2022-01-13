@@ -1,0 +1,418 @@
+============================= test session starts ==============================
+platform linux -- Python 3.8.10, pytest-5.2.2, py-1.8.0, pluggy-0.13.0
+rootdir: /home/matan/Documents/gittick-course/exercise-1/q1
+collected 14 items
+
+tests/test_client_q1.py ......                                           [ 42%]
+tests/test_server_q1.py 
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KeyboardInterrupt !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+config = <_pytest.config.Config object at 0x7fc5efffddf0>
+doit = <function _main at 0x7fc5f0101e50>
+
+    def wrap_session(config, doit):
+        """Skeleton command line program"""
+        session = Session(config)
+        session.exitstatus = ExitCode.OK
+        initstate = 0
+        try:
+            try:
+                config._do_configure()
+                initstate = 1
+                config.hook.pytest_sessionstart(session=session)
+                initstate = 2
+>               session.exitstatus = doit(config, session) or 0
+
+../.env/lib/python3.8/site-packages/_pytest/main.py:193: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+config = <_pytest.config.Config object at 0x7fc5efffddf0>
+session = <Session q1 exitstatus=<ExitCode.OK: 0> testsfailed=0 testscollected=14>
+
+    def _main(config, session):
+        """ default command line protocol for initialization, session,
+        running tests and reporting. """
+        config.hook.pytest_collection(session=session)
+>       config.hook.pytest_runtestloop(session=session)
+
+../.env/lib/python3.8/site-packages/_pytest/main.py:237: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <_HookCaller 'pytest_runtestloop'>, args = ()
+kwargs = {'session': <Session q1 exitstatus=<ExitCode.OK: 0> testsfailed=0 testscollected=14>}
+notincall = set()
+
+    def __call__(self, *args, **kwargs):
+        if args:
+            raise TypeError("hook calling supports only keyword arguments")
+        assert not self.is_historic()
+        if self.spec and self.spec.argnames:
+            notincall = (
+                set(self.spec.argnames) - set(["__multicall__"]) - set(kwargs.keys())
+            )
+            if notincall:
+                warnings.warn(
+                    "Argument(s) {} which are declared in the hookspec "
+                    "can not be found in this hook call".format(tuple(notincall)),
+                    stacklevel=2,
+                )
+>       return self._hookexec(self, self.get_hookimpls(), kwargs)
+
+../.env/lib/python3.8/site-packages/pluggy/hooks.py:286: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <_pytest.config.PytestPluginManager object at 0x7fc5f0da2d00>
+hook = <_HookCaller 'pytest_runtestloop'>
+methods = [<HookImpl plugin_name='main', plugin=<module '_pytest.main' from '/home/matan/Documents/gittick-course/exercise-1/.en...t/main.py'>>, <HookImpl plugin_name='logging-plugin', plugin=<_pytest.logging.LoggingPlugin object at 0x7fc5efeb6550>>]
+kwargs = {'session': <Session q1 exitstatus=<ExitCode.OK: 0> testsfailed=0 testscollected=14>}
+
+    def _hookexec(self, hook, methods, kwargs):
+        # called from all hookcaller instances.
+        # enable_tracing will set its own wrapping function at self._inner_hookexec
+>       return self._inner_hookexec(hook, methods, kwargs)
+
+../.env/lib/python3.8/site-packages/pluggy/manager.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+hook = <_HookCaller 'pytest_runtestloop'>
+methods = [<HookImpl plugin_name='main', plugin=<module '_pytest.main' from '/home/matan/Documents/gittick-course/exercise-1/.en...t/main.py'>>, <HookImpl plugin_name='logging-plugin', plugin=<_pytest.logging.LoggingPlugin object at 0x7fc5efeb6550>>]
+kwargs = {'session': <Session q1 exitstatus=<ExitCode.OK: 0> testsfailed=0 testscollected=14>}
+
+>   self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(
+        methods,
+        kwargs,
+        firstresult=hook.spec.opts.get("firstresult") if hook.spec else False,
+    )
+
+../.env/lib/python3.8/site-packages/pluggy/manager.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+session = <Session q1 exitstatus=<ExitCode.OK: 0> testsfailed=0 testscollected=14>
+
+    def pytest_runtestloop(session):
+        if session.testsfailed and not session.config.option.continue_on_collection_errors:
+            raise session.Interrupted("%d errors during collection" % session.testsfailed)
+    
+        if session.config.option.collectonly:
+            return True
+    
+        for i, item in enumerate(session.items):
+            nextitem = session.items[i + 1] if i + 1 < len(session.items) else None
+>           item.config.hook.pytest_runtest_protocol(item=item, nextitem=nextitem)
+
+../.env/lib/python3.8/site-packages/_pytest/main.py:258: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <_HookCaller 'pytest_runtest_protocol'>, args = ()
+kwargs = {'item': <Function test_connection>, 'nextitem': <Function test_user_id>}
+notincall = set()
+
+    def __call__(self, *args, **kwargs):
+        if args:
+            raise TypeError("hook calling supports only keyword arguments")
+        assert not self.is_historic()
+        if self.spec and self.spec.argnames:
+            notincall = (
+                set(self.spec.argnames) - set(["__multicall__"]) - set(kwargs.keys())
+            )
+            if notincall:
+                warnings.warn(
+                    "Argument(s) {} which are declared in the hookspec "
+                    "can not be found in this hook call".format(tuple(notincall)),
+                    stacklevel=2,
+                )
+>       return self._hookexec(self, self.get_hookimpls(), kwargs)
+
+../.env/lib/python3.8/site-packages/pluggy/hooks.py:286: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <_pytest.config.PytestPluginManager object at 0x7fc5f0da2d00>
+hook = <_HookCaller 'pytest_runtest_protocol'>
+methods = [<HookImpl plugin_name='runner', plugin=<module '_pytest.runner' from '/home/matan/Documents/gittick-course/exercise-1...arnings' from '/home/matan/Documents/gittick-course/exercise-1/.env/lib/python3.8/site-packages/_pytest/warnings.py'>>]
+kwargs = {'item': <Function test_connection>, 'nextitem': <Function test_user_id>}
+
+    def _hookexec(self, hook, methods, kwargs):
+        # called from all hookcaller instances.
+        # enable_tracing will set its own wrapping function at self._inner_hookexec
+>       return self._inner_hookexec(hook, methods, kwargs)
+
+../.env/lib/python3.8/site-packages/pluggy/manager.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+hook = <_HookCaller 'pytest_runtest_protocol'>
+methods = [<HookImpl plugin_name='runner', plugin=<module '_pytest.runner' from '/home/matan/Documents/gittick-course/exercise-1...arnings' from '/home/matan/Documents/gittick-course/exercise-1/.env/lib/python3.8/site-packages/_pytest/warnings.py'>>]
+kwargs = {'item': <Function test_connection>, 'nextitem': <Function test_user_id>}
+
+>   self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(
+        methods,
+        kwargs,
+        firstresult=hook.spec.opts.get("firstresult") if hook.spec else False,
+    )
+
+../.env/lib/python3.8/site-packages/pluggy/manager.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+item = <Function test_connection>, nextitem = <Function test_user_id>
+
+    def pytest_runtest_protocol(item, nextitem):
+        item.ihook.pytest_runtest_logstart(nodeid=item.nodeid, location=item.location)
+>       runtestprotocol(item, nextitem=nextitem)
+
+../.env/lib/python3.8/site-packages/_pytest/runner.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+item = <Function test_connection>, log = True
+nextitem = <Function test_user_id>
+
+    def runtestprotocol(item, log=True, nextitem=None):
+        hasrequest = hasattr(item, "_request")
+        if hasrequest and not item._request:
+            item._initrequest()
+        rep = call_and_report(item, "setup", log)
+        reports = [rep]
+        if rep.passed:
+            if item.config.getoption("setupshow", False):
+                show_test_item(item)
+            if not item.config.getoption("setuponly", False):
+>               reports.append(call_and_report(item, "call", log))
+
+../.env/lib/python3.8/site-packages/_pytest/runner.py:95: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+item = <Function test_connection>, when = 'call', log = True, kwds = {}
+
+    def call_and_report(item, when, log=True, **kwds):
+>       call = call_runtest_hook(item, when, **kwds)
+
+../.env/lib/python3.8/site-packages/_pytest/runner.py:176: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+item = <Function test_connection>, when = 'call', kwds = {}
+hookname = 'pytest_runtest_call'
+reraise = (<class '_pytest.outcomes.Exit'>, <class 'KeyboardInterrupt'>)
+
+    def call_runtest_hook(item, when, **kwds):
+        hookname = "pytest_runtest_" + when
+        ihook = getattr(item.ihook, hookname)
+        reraise = (Exit,)  # type: Tuple[Type[BaseException], ...]
+        if not item.config.getoption("usepdb", False):
+            reraise += (KeyboardInterrupt,)
+>       return CallInfo.from_call(
+            lambda: ihook(item=item, **kwds), when=when, reraise=reraise
+        )
+
+../.env/lib/python3.8/site-packages/_pytest/runner.py:200: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+cls = <class '_pytest.runner.CallInfo'>
+func = <function call_runtest_hook.<locals>.<lambda> at 0x7fc5effebaf0>
+when = 'call'
+reraise = (<class '_pytest.outcomes.Exit'>, <class 'KeyboardInterrupt'>)
+
+    @classmethod
+    def from_call(cls, func, when, reraise=None):
+        #: context of invocation: one of "setup", "call",
+        #: "teardown", "memocollect"
+        start = time()
+        excinfo = None
+        try:
+>           result = func()
+
+../.env/lib/python3.8/site-packages/_pytest/runner.py:229: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>       lambda: ihook(item=item, **kwds), when=when, reraise=reraise
+    )
+
+../.env/lib/python3.8/site-packages/_pytest/runner.py:201: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <_HookCaller 'pytest_runtest_call'>, args = ()
+kwargs = {'item': <Function test_connection>}, notincall = set()
+
+    def __call__(self, *args, **kwargs):
+        if args:
+            raise TypeError("hook calling supports only keyword arguments")
+        assert not self.is_historic()
+        if self.spec and self.spec.argnames:
+            notincall = (
+                set(self.spec.argnames) - set(["__multicall__"]) - set(kwargs.keys())
+            )
+            if notincall:
+                warnings.warn(
+                    "Argument(s) {} which are declared in the hookspec "
+                    "can not be found in this hook call".format(tuple(notincall)),
+                    stacklevel=2,
+                )
+>       return self._hookexec(self, self.get_hookimpls(), kwargs)
+
+../.env/lib/python3.8/site-packages/pluggy/hooks.py:286: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <_pytest.config.PytestPluginManager object at 0x7fc5f0da2d00>
+hook = <_HookCaller 'pytest_runtest_call'>
+methods = [<HookImpl plugin_name='runner', plugin=<module '_pytest.runner' from '/home/matan/Documents/gittick-course/exercise-1..._item=None>>, <HookImpl plugin_name='logging-plugin', plugin=<_pytest.logging.LoggingPlugin object at 0x7fc5efeb6550>>]
+kwargs = {'item': <Function test_connection>}
+
+    def _hookexec(self, hook, methods, kwargs):
+        # called from all hookcaller instances.
+        # enable_tracing will set its own wrapping function at self._inner_hookexec
+>       return self._inner_hookexec(hook, methods, kwargs)
+
+../.env/lib/python3.8/site-packages/pluggy/manager.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+hook = <_HookCaller 'pytest_runtest_call'>
+methods = [<HookImpl plugin_name='runner', plugin=<module '_pytest.runner' from '/home/matan/Documents/gittick-course/exercise-1..._item=None>>, <HookImpl plugin_name='logging-plugin', plugin=<_pytest.logging.LoggingPlugin object at 0x7fc5efeb6550>>]
+kwargs = {'item': <Function test_connection>}
+
+>   self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(
+        methods,
+        kwargs,
+        firstresult=hook.spec.opts.get("firstresult") if hook.spec else False,
+    )
+
+../.env/lib/python3.8/site-packages/pluggy/manager.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+item = <Function test_connection>
+
+    def pytest_runtest_call(item):
+        _update_current_test_var(item, "call")
+        sys.last_type, sys.last_value, sys.last_traceback = (None, None, None)
+        try:
+>           item.runtest()
+
+../.env/lib/python3.8/site-packages/_pytest/runner.py:125: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Function test_connection>
+
+    def runtest(self):
+        """ execute the underlying test function. """
+>       self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+
+../.env/lib/python3.8/site-packages/_pytest/python.py:1423: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <_HookCaller 'pytest_pyfunc_call'>, args = ()
+kwargs = {'pyfuncitem': <Function test_connection>}, notincall = set()
+
+    def __call__(self, *args, **kwargs):
+        if args:
+            raise TypeError("hook calling supports only keyword arguments")
+        assert not self.is_historic()
+        if self.spec and self.spec.argnames:
+            notincall = (
+                set(self.spec.argnames) - set(["__multicall__"]) - set(kwargs.keys())
+            )
+            if notincall:
+                warnings.warn(
+                    "Argument(s) {} which are declared in the hookspec "
+                    "can not be found in this hook call".format(tuple(notincall)),
+                    stacklevel=2,
+                )
+>       return self._hookexec(self, self.get_hookimpls(), kwargs)
+
+../.env/lib/python3.8/site-packages/pluggy/hooks.py:286: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <_pytest.config.PytestPluginManager object at 0x7fc5f0da2d00>
+hook = <_HookCaller 'pytest_pyfunc_call'>
+methods = [<HookImpl plugin_name='python', plugin=<module '_pytest.python' from '/home/matan/Documents/gittick-course/exercise-1...kipping' from '/home/matan/Documents/gittick-course/exercise-1/.env/lib/python3.8/site-packages/_pytest/skipping.py'>>]
+kwargs = {'pyfuncitem': <Function test_connection>}
+
+    def _hookexec(self, hook, methods, kwargs):
+        # called from all hookcaller instances.
+        # enable_tracing will set its own wrapping function at self._inner_hookexec
+>       return self._inner_hookexec(hook, methods, kwargs)
+
+../.env/lib/python3.8/site-packages/pluggy/manager.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+hook = <_HookCaller 'pytest_pyfunc_call'>
+methods = [<HookImpl plugin_name='python', plugin=<module '_pytest.python' from '/home/matan/Documents/gittick-course/exercise-1...kipping' from '/home/matan/Documents/gittick-course/exercise-1/.env/lib/python3.8/site-packages/_pytest/skipping.py'>>]
+kwargs = {'pyfuncitem': <Function test_connection>}
+
+>   self._inner_hookexec = lambda hook, methods, kwargs: hook.multicall(
+        methods,
+        kwargs,
+        firstresult=hook.spec.opts.get("firstresult") if hook.spec else False,
+    )
+
+../.env/lib/python3.8/site-packages/pluggy/manager.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+pyfuncitem = <Function test_connection>
+
+    @hookimpl(trylast=True)
+    def pytest_pyfunc_call(pyfuncitem):
+        def async_warn():
+            msg = "async def functions are not natively supported and have been skipped.\n"
+            msg += "You need to install a suitable plugin for your async framework, for example:\n"
+            msg += "  - pytest-asyncio\n"
+            msg += "  - pytest-trio\n"
+            msg += "  - pytest-tornasync"
+            warnings.warn(PytestUnhandledCoroutineWarning(msg.format(pyfuncitem.nodeid)))
+            skip(msg="async def function and no async plugin installed (see warnings)")
+    
+        testfunction = pyfuncitem.obj
+        if iscoroutinefunction(testfunction) or (
+            sys.version_info >= (3, 6) and inspect.isasyncgenfunction(testfunction)
+        ):
+            async_warn()
+        funcargs = pyfuncitem.funcargs
+        testargs = {arg: funcargs[arg] for arg in pyfuncitem._fixtureinfo.argnames}
+>       result = testfunction(**testargs)
+
+../.env/lib/python3.8/site-packages/_pytest/python.py:170: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+get_output = <function get_output.<locals>.<lambda> at 0x7fc5efe57dc0>
+
+    def test_connection(get_output):
+        _upload_thought(_USER_1, _TIMESTAMP_1, _THOUGHT_1)
+>       output = get_output()
+
+tests/test_server_q1.py:46: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+>   yield lambda: parent.recv()
+
+tests/test_server_q1.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <multiprocessing.connection.Connection object at 0x7fc5efdf3df0>
+
+    def recv(self):
+        """Receive a (picklable) object"""
+        self._check_closed()
+        self._check_readable()
+>       buf = self._recv_bytes()
+
+/usr/lib/python3.8/multiprocessing/connection.py:250: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <multiprocessing.connection.Connection object at 0x7fc5efdf3df0>
+maxsize = None
+
+    def _recv_bytes(self, maxsize=None):
+>       buf = self._recv(4)
+
+/usr/lib/python3.8/multiprocessing/connection.py:414: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <multiprocessing.connection.Connection object at 0x7fc5efdf3df0>
+size = 4, read = <built-in function read>
+
+    def _recv(self, size, read=_read):
+        buf = io.BytesIO()
+        handle = self._handle
+        remaining = size
+        while remaining > 0:
+>           chunk = read(handle, remaining)
+E           KeyboardInterrupt
+
+/usr/lib/python3.8/multiprocessing/connection.py:379: KeyboardInterrupt
+============================== 6 passed in 3.38s ===============================

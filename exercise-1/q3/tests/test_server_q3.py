@@ -18,7 +18,7 @@ import server
 _SERVER_ADDRESS = '127.0.0.1', 5000
 _SERVER_PATH = pathlib.Path(__file__).absolute().parent.parent / 'server.py'
 
-_HEADER_FORMAT = 'LLI'
+_HEADER_FORMAT = '<LLI'
 
 _USER_1 = 1
 _USER_2 = 2
