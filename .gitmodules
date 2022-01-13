@@ -1,6 +1,0 @@
-[submodule "exercise-0"]
-	path = exercise-0
-	url = https://github.com/matanmarkind/gittik-system-design/exercise-0.git
-[submodule "exercise-1"]
-	path = exercise-1
-	url = https://github.com/advanced-system-design/exercise-1.git
