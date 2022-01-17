@@ -54,46 +54,46 @@ def test_e1c_one_liner():
     _test_one_liner(is_prime)
 
 
-@optional
+# @optional
 def test_e1d():
     for repeat in range(1, 5):
         assert {''.join(x) for x in itertools.product(_ALPHABET, repeat=repeat)} == product(_ALPHABET, repeat)
 
 
-@optional
+# @optional
 def test_e1d_one_liner():
     _test_one_liner(product)
 
 
-@optional
+# @optional
 def test_e1e():
     for repeat in range(1, 5):
         assert {''.join(x) for x in itertools.permutations(_ALPHABET, repeat)} == permutations(_ALPHABET, repeat)
 
 
-@optional
+# @optional
 def test_e1e_one_liner():
     _test_one_liner(permutations)
 
 
-@optional
+# @optional
 def test_e1f():
     for repeat in range(1, 5):
         assert {''.join(x) for x in itertools.combinations(_ALPHABET, repeat)} == combinations(_ALPHABET, repeat)
 
 
-@optional
+# @optional
 def test_e1f_one_liner():
     _test_one_liner(combinations)
 
 
-@optional
+# @optional
 def test_e1g():
     for repeat in range(1, 5):
         assert {''.join(x) for x in itertools.combinations_with_replacement(_ALPHABET, repeat)} == combinations_with_replacement(_ALPHABET, repeat)
 
 
-@optional
+# @optional
 def test_e1g_one_liner():
     _test_one_liner(combinations_with_replacement)
 
