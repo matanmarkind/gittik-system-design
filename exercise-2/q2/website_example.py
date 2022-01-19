@@ -1,6 +1,5 @@
 from website import Website
 
-
 website = Website()
 
 
