@@ -24,10 +24,8 @@ class Listener:
         self.server.close()
     def __enter__(self):
         self.start()
-        return self
-    def __exit__(self):
+    def __exit__(self, exception, error, traceback):
         self.stop()
-        return self
 
     def accept(self):
         client, _ = self.server.accept()

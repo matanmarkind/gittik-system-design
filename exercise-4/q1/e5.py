@@ -1,18 +1,44 @@
+import contextlib
+import tempfile
+import io
+import time
+
+
+@contextlib.contextmanager
 def timer():
-    pass # TODO
+    try:
+        timer.started = time.time()
+        yield timer
+    finally:
+        timer.stopped = time.time()
+        timer.elapsed = timer.stopped - timer.started
 
 
+@contextlib.contextmanager
 def suppress(*exceptions):
-    pass # TODO
+    exceptions = exceptions if exceptions else (Exception)
+    try:
+        yield
+    except exceptions as e:
+        pass
 
 
+@contextlib.contextmanager
 def standard_output():
-    pass # TODO
+    stdcapture = io.StringIO()
+    redirect = contextlib.redirect_stdout(stdcapture)
+    with redirect as stdout:
+        yield standard_output
+    standard_output.value = stdcapture.getvalue()
 
 
+@contextlib.contextmanager
 def temporary_file():
-    pass # TODO
+    with tempfile.NamedTemporaryFile() as tf:
+        yield tf.name
 
 
+@contextlib.contextmanager
 def temporary_directory():
-    pass # TODO
+    with tempfile.TemporaryDirectory() as td:
+        yield td
