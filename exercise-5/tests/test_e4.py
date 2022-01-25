@@ -35,8 +35,13 @@ def test_in_directory_import(path):
 
 
 def test_in_directory_import_from_cwd(path):
+    print('conftest' in sys.modules)
     import conftest
+    print('conftest' in sys.modules)
     del sys.modules['conftest']
+    print('conftest' in sys.modules)
     with in_directory(path):
+        print('conftest' in sys.modules)
         with pytest.raises(ImportError):
+            print('conftest' in sys.modules)
             import conftest
